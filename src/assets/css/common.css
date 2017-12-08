@@ -19,6 +19,11 @@ ol {
   position: relative;
 }
 
+.wrap {
+  width: 100%;
+  background-color: #fff;
+}
+
 
 /* flex */
 

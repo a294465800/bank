@@ -35,6 +35,7 @@
       <li><router-link to="/login">温故知新</router-link></li>
       <li><router-link to="/login">10道小测试</router-link></li>
       <li><router-link to="/login">20道小测试</router-link></li>
+      <li><router-link to="/login">30道小测试</router-link></li>
       <li><router-link to="/login">50道小测试</router-link></li>
       <li><router-link to="/login">排名查询</router-link></li>
       <li><router-link to="/login">考试入口</router-link></li>
