@@ -7,6 +7,27 @@ import '@/assets/css/common.css'
 
 Vue.config.productionTip = false
 
+/**
+ * 全局钩子
+ */
+router.beforeEach((to, from, next) => {
+  if (sessionStorage.username) {
+    if (to.name === 'Login') {
+      next(from.path)
+    } else {
+      next()
+    }
+  } else {
+    if (to.name !== 'Login') {
+      next({
+        path: '/login'
+      })
+    } else {
+      next()
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

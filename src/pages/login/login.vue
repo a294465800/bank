@@ -13,13 +13,15 @@
   display: flex;
   flex-direction: row;
   font-size: 14px;
-  margin: 5px 0;
+  margin: 5px 0 30px;
   line-height: 2.3;
   text-align: left;
+  position: relative;
 }
 
 .inline-label > span {
-  width: 60px;
+  width: 6rem;
+  font-size: 14px;
 }
 
 .inline-label > input {
@@ -27,12 +29,30 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 4px 10px;
+  padding: 0 10px;
   outline: 0;
+  min-width: 100px;
 }
 
 .inline-label > input:focus {
   border-color: #7f7fbf;
+}
+
+.form-tips {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1em;
+  font-size: 12px;
+  color: red;
+  transform: translateY(100%);
+  margin: 0;
+  padding-left: 6rem;
+}
+
+.inline-label > input.error {
+  border-color: red;
 }
 
 .form-btn {
@@ -54,7 +74,7 @@
 }
 
 .copy {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 15px;
@@ -69,13 +89,15 @@
       <form> 
         <label class="inline-label">
           <span>帐号：</span>
-          <input type="text" placeholder="请输入帐号">
+          <input :class="{error: wrongTip.username}" type="text" placeholder="请输入帐号" v-model="loginForm.username" @blur="checkForm('username')">
+          <p v-if="wrongTip.username" class="form-tips">{{formCheck.username.message}}</p>
         </label>
         <label class="inline-label">
           <span>密码：</span>
-          <input type="password" placeholder="请输入密码">
+          <input :class="{error: wrongTip.password}" type="password" placeholder="请输入密码" v-model="loginForm.password" @blur="checkForm('password')">
+          <p v-if="wrongTip.password" class="form-tips">{{formCheck.password.message}}</p>
         </label>
-        <button class="form-btn">登录</button>
+        <button class="form-btn" @click.prevent="login">登录</button>
       </form>
     </div>
 
@@ -86,7 +108,43 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      loginForm: {
+        username: "",
+        password: ""
+      },
+      formCheck: {
+        username: { message: "帐号不能为空" },
+        password: { message: "密码不能为空" }
+      },
+      wrongTip: {
+        username: false,
+        password: false
+      }
+    };
+  },
+
+  methods: {
+    /**
+     * 登录函数
+     */
+    login() {
+      if (this.loginForm.username && this.loginForm.password) {
+        sessionStorage.username = this.loginForm.username;
+        this.$router.push("/");
+      }
+    },
+
+    /**
+   * 表单验证
+   */
+    checkForm(formName) {
+      if (this.loginForm[formName] === "") {
+        this.wrongTip[formName] = true;
+      } else {
+        this.wrongTip[formName] = false;
+      }
+    }
   }
 };
 </script>

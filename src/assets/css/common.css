@@ -6,6 +6,13 @@ html {
   font-size: 12px;
 }
 
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .full-wrap {
   height: 100vh;
   overflow: hidden;
