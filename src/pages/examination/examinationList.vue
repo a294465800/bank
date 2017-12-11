@@ -39,7 +39,7 @@
 
 <template>
   <div class="wrap">
-    <h3 class="test-title">请选择题库</h3>
+    <h3 class="test-title">请选择题库 {{title}}</h3>
     <ul class="test-list">
       <template v-if="list.length > 0">
         <li class="test-item" v-for="(item, index) in list" :key="item.id">
@@ -58,21 +58,41 @@
 export default {
   data() {
     return {
-      list: []
+      list: [],
+      title: ""
     };
   },
 
   created() {
+    sessionStorage.type = this.$route.params.type;
     this.$http.getExaminationList(res => {
-      console.log(res);
       this.list = res.data.list;
     });
+    console.log(sessionStorage.type)
+    this.title = this.getTitle(sessionStorage.type)
   },
 
   methods: {
+    getTitle(type) {
+      let str =''
+      type = Number(type)
+      switch (type) {
+        case 2:
+          str = "（20道题）";
+          break;
+        case 3:
+          str = "（30道题）";
+          break;
+        case 5:
+          str = "（50道题）";
+          break;
+        default:
+          str = "（10道题）";
+      }
+      return str;
+    },
     //考试跳转
     startExamination(row) {
-      console.log(row);
       this.$router.push({
         name: "Examination",
         params: {

@@ -55,5 +55,21 @@ export default {
       .catch(err => {
         this.errFnc(err)
       })
+  },
+
+  /**
+   * 获取考试题目
+   * @param {Function} cb 
+   */
+  getExamination(data, cb) {
+    axios.get(host + 'examination', {
+        params: data
+      })
+      .then(res => {
+        typeof cb === 'function' && cb(res)
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
   }
 }
