@@ -26,6 +26,9 @@
 .index-list > li > a {
   text-decoration: none;
   color: #333;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 </style>
 
@@ -33,10 +36,10 @@
   <div class="full-wrap">
     <ul class="index-list flex-column flex-center">
       <li><router-link to="/login">温故知新</router-link></li>
-      <li><router-link to="/login">10道小测试</router-link></li>
-      <li><router-link to="/login">20道小测试</router-link></li>
-      <li><router-link to="/login">30道小测试</router-link></li>
-      <li><router-link to="/login">50道小测试</router-link></li>
+      <li><router-link to="/examination/list">10道小测试</router-link></li>
+      <li><router-link to="/examination/list">20道小测试</router-link></li>
+      <li><router-link to="/examination/list">30道小测试</router-link></li>
+      <li><router-link to="/examination/list">50道小测试</router-link></li>
       <li><router-link to="/login">排名查询</router-link></li>
       <li><router-link to="/login">考试入口</router-link></li>
     </ul>

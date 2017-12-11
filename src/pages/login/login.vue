@@ -124,14 +124,21 @@ export default {
     };
   },
 
+  created() {
+  },
+
   methods: {
     /**
      * 登录函数
      */
     login() {
       if (this.loginForm.username && this.loginForm.password) {
-        sessionStorage.username = this.loginForm.username;
-        this.$router.push("/");
+        this.$http.postLogin(this.loginForm, res => {
+          sessionStorage.username = this.loginForm.username;
+          this.$router.push("/");
+        });
+      } else {
+        return false;
       }
     },
 

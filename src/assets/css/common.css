@@ -41,3 +41,11 @@ ol {
   justify-content: center;
   align-items: center;
 }
+
+/* element-ui */
+.el-radio {
+  width: 100%;
+  margin-left: 0!important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
