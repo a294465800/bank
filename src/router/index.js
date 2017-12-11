@@ -5,6 +5,7 @@ import Index from '@/pages/index/index'
 import ExaminationList from '@/pages/examination/examinationList'
 import Examination from '@/pages/examination/examination'
 import Rank from '@/pages/rank/rank'
+import Reword from '@/pages/reword/reword'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/rank',
       name: 'Rank',
       component: Rank
+    },
+    {
+      path: '/reword',
+      name: 'Reword',
+      component: Reword
     },
   ]
 })

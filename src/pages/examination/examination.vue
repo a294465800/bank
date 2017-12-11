@@ -99,8 +99,10 @@ export default {
       }
       if (left.length > 0) {
         this.examTipsDialog = true;
-        const str = `你还有第${left.join(",")}题没有完成，确认提交吗？`;
+        const str = `你还有第${left.join(",")}题没有完成，请先完成答卷？`;
         this.dialogMessage = str;
+      } else {
+        this.$router.push({ name: "Reword" });
       }
     },
 
