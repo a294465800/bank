@@ -71,5 +71,19 @@ export default {
       .catch(err => {
         this.errFnc(err)
       })
+  },
+
+  /**
+   * 获取排名
+   * @param {Function} cb 回调
+   */
+  getRank(cb) {
+    axios.get(host + 'rank')
+      .then(res => {
+        typeof cb === 'function' && cb(res)
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
   }
 }
