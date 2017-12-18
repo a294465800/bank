@@ -107,6 +107,38 @@ export default {
   },
 
   /**
+   * 获取考试列表
+   * @param {*} data 
+   * @param {Function} cb 回调
+   */
+  getExaminations(data, cb) {
+    axios.get(host + 'exams', {
+        params: data
+      })
+      .then(res => {
+        typeof cb === 'function' && cb(res)
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
+  },
+
+  /**
+   * 获取考试内容
+   * @param {String} id 
+   * @param {Function} cb 回调
+   */
+  getExamination(id, cb) {
+    axios.get(host + `exam/${id}`)
+      .then(res => {
+        typeof cb === 'function' && cb(res)
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
+  },
+
+  /**
    * 获取排名
    * @param {Function} cb 回调
    */

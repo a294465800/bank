@@ -69,10 +69,7 @@ export default {
   },
 
   created() {
-    const id = {
-      id: this.$route.params.id,
-      type: sessionStorage.type
-    };
+    const id = this.$route.params.id;
     this.$http.getExamination(id, res => {
       for (let it of res.data.questions) {
         if (it.type === "A") {

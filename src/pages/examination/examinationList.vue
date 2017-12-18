@@ -64,11 +64,7 @@ export default {
   },
 
   created() {
-    const getData = {
-      limit: this.$route.params.type,
-      warehouse_id: ""
-    };
-    this.$http.getExaminationList(getData, res => {
+    this.$http.getExaminations("", res => {
       this.list = res.data.list;
     });
   },
