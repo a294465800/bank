@@ -96,8 +96,8 @@ export default {
    * @param {Object} data 
    * @param {Function} cb 回调
    */
-  postTrains(data, cb) {
-    axios.post(host + 'finish/train', data)
+  postTrains(id, data, cb) {
+    axios.post(host + `finish/train/${id}`, data)
       .then(res => {
         typeof cb === 'function' && cb(res)
       })

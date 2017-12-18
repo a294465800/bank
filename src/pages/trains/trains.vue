@@ -73,6 +73,7 @@ export default {
       limit: sessionStorage.limit,
       warehouse_id: this.$route.params.id
     };
+    this.exam_id = this.$route.params.id;
     this.$http.getTrains(getData, res => {
       for (let it of res.data.questions) {
         if (it.type === "A") {
@@ -102,7 +103,7 @@ export default {
         const str = `你还有第${left.join(",")}题没有完成，请先完成答卷？`;
         this.dialogMessage = str;
       } else {
-        this.$http.postTrains(this.answer, res => {
+        this.$http.postTrains(this.exam_id, this.answer, res => {
           this.$router.push({ name: "Reword" });
         });
       }
