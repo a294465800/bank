@@ -39,16 +39,16 @@
 
 <template>
   <div class="wrap">
-    <h3 class="test-title">请选择考试</h3>
+    <h3 class="test-title">请选择题库 {{title}}</h3>
     <ul class="test-list">
       <template v-if="list.length > 0">
         <li class="test-item" v-for="(item, index) in list" :key="item.id">
           <span class="test-name">{{item.name}}</span>
-          <span class="test-btn" @click="startExamination(item)">开始考试</span>
+          <span class="test-btn" @click="startExamination(item)">开始练习</span>
         </li>
       </template>
       <template v-else>
-        <p>还没有考试</p>
+        <p>还没有题库</p>
       </template>
     </ul>
   </div>
@@ -64,20 +64,17 @@ export default {
   },
 
   created() {
-    const getData = {
-      limit: this.$route.params.type,
-      warehouse_id: ""
-    };
-    this.$http.getExaminationList(getData, res => {
+    this.$http.getTrainsList(res => {
       this.list = res.data.list;
     });
+    this.title = `（${sessionStorage.limit}道题）`;
   },
 
   methods: {
     //考试跳转
     startExamination(row) {
       this.$router.push({
-        name: "Examination",
+        name: "Trains",
         params: {
           id: row.id
         }

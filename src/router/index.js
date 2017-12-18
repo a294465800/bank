@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Login from '@/pages/login/login'
 import Index from '@/pages/index/index'
 import Mistake from '@/pages/mistake/mistakes'
+import TrainsList from '@/pages/trains/trainsList'
+import Trains from '@/pages/trains/trains'
 import ExaminationList from '@/pages/examination/examinationList'
 import Examination from '@/pages/examination/examination'
 import Rank from '@/pages/rank/rank'
@@ -24,6 +26,28 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: Index
+    },
+    {
+      path: '/trains/list',
+      name: 'TrainsList',
+      component: TrainsList,
+      beforeEnter: (to, from, next) => {
+        if (!from.name) {
+          next('/')
+        }
+        next()
+      }
+    },
+    {
+      path: '/trains',
+      name: 'Trains',
+      component: Trains,
+      beforeEnter: (to, from, next) => {
+        if (!from.name) {
+          next('trains/list')
+        }
+        next()
+      }
     },
     {
       path: '/examination/list',

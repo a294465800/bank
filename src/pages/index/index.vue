@@ -38,23 +38,23 @@
       <li>
         <router-link to="/mistake">温故知新</router-link>
       </li>
-      <li>
-        <router-link :to="{ name: 'ExaminationList', params: { type: 1 }}">10道小测试</router-link>
+      <li @click="saveLimit(10)">
+        <router-link :to="{ name: 'TrainsList'}">10道小测试</router-link>
       </li>
-      <li>
-        <router-link :to="{ name: 'ExaminationList', params: { type: 2 }}">20道小测试</router-link>
+      <li @click="saveLimit(20)">
+        <router-link :to="{ name: 'TrainsList'}" @click="sessionStorage.limit = 20">20道小测试</router-link>
       </li>
-      <li>
-        <router-link :to="{ name: 'ExaminationList', params: { type: 3 }}">30道小测试</router-link>
+      <li @click="saveLimit(30)">
+        <router-link :to="{ name: 'TrainsList'}" @click="sessionStorage.limit = 30">30道小测试</router-link>
       </li>
-      <li>
-        <router-link :to="{ name: 'ExaminationList', params: { type: 4 }}">50道小测试</router-link>
+      <li @click="saveLimit(50)">
+        <router-link :to="{ name: 'TrainsList'}" @click="sessionStorage.limit = 50">50道小测试</router-link>
       </li>
       <li>
         <router-link to="/rank">排名查询</router-link>
       </li>
       <li>
-        <router-link to="/login">考试入口</router-link>
+        <router-link to="/examination/list">考试入口</router-link>
       </li>
     </ul>
   </div>
@@ -64,6 +64,12 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    //保存 limit
+    saveLimit(num) {
+      sessionStorage.limit = num;
+    }
   }
 };
 </script>
