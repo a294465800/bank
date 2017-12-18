@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/pages/login/login'
 import Index from '@/pages/index/index'
+import Mistake from '@/pages/mistake/mistakes'
 import ExaminationList from '@/pages/examination/examinationList'
 import Examination from '@/pages/examination/examination'
 import Rank from '@/pages/rank/rank'
@@ -14,6 +15,10 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    }, {
+      path: '/mistake',
+      name: 'Mistake',
+      component: Mistake
     },
     {
       path: '/',

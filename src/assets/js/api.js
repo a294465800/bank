@@ -34,7 +34,24 @@ export default {
    * @param {Function} cb 回调
    */
   postLogin(data, cb) {
-    axios.post(host + 'login', data)
+    axios.post(host + 'staff/login', data)
+      .then(res => {
+        typeof cb === 'function' && cb(res)
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
+  },
+
+  /**
+   * 获取错题
+   * @param {Object} data 
+   * @param {Function} cb 回调
+   */
+  getWrongQuestions(data, cb) {
+    axios.get(host + 'mistakes', {
+        params: data
+      })
       .then(res => {
         typeof cb === 'function' && cb(res)
       })
