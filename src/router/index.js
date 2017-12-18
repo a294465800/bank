@@ -28,7 +28,13 @@ export default new Router({
     {
       path: '/examination/list',
       name: 'ExaminationList',
-      component: ExaminationList
+      component: ExaminationList,
+      beforeEnter: (to, from, next) => {
+        if (!from.name) {
+          next('/')
+        }
+        next()
+      }
     },
     {
       path: '/examination',

@@ -33,12 +33,12 @@
     <ul class="question-list">
       <li class="question-item" v-for="(question, index) in questions" :key="question.id">
         <h3>{{(index + 1) + '.' + question.title}}</h3>
-          <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
-            <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
-          </el-radio-group>
-          <el-checkbox-group class="question-option" v-else-if="question.type === 'B'"  v-model="answer[question.id]">
-            <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
-          </el-checkbox-group>
+        <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
+          <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
+        </el-radio-group>
+        <el-checkbox-group class="question-option" v-else-if="question.type === 'B'" v-model="answer[question.id]">
+          <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
+        </el-checkbox-group>
       </li>
     </ul>
 
@@ -102,7 +102,9 @@ export default {
         const str = `你还有第${left.join(",")}题没有完成，请先完成答卷？`;
         this.dialogMessage = str;
       } else {
-        this.$router.push({ name: "Reword" });
+        this.$http.postExamination(this.answer, res => {
+          this.$router.push({ name: "Reword" });
+        });
       }
     },
 

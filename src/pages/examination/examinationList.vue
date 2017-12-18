@@ -65,17 +65,20 @@ export default {
 
   created() {
     sessionStorage.type = this.$route.params.type;
-    this.$http.getExaminationList(res => {
+    const getData = {
+      limit: this.$route.params.type,
+      warehouse_id: ""
+    };
+    this.$http.getExaminationList(getData, res => {
       this.list = res.data.list;
     });
-    console.log(sessionStorage.type)
-    this.title = this.getTitle(sessionStorage.type)
+    this.title = this.getTitle(sessionStorage.type);
   },
 
   methods: {
     getTitle(type) {
-      let str =''
-      type = Number(type)
+      let str = "";
+      type = Number(type);
       switch (type) {
         case 2:
           str = "（20道题）";
@@ -83,7 +86,7 @@ export default {
         case 3:
           str = "（30道题）";
           break;
-        case 5:
+        case 4:
           str = "（50道题）";
           break;
         default:

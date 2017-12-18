@@ -86,7 +86,7 @@
   <div class="full-wrap flex-column flex-center">
     <img class="login-img" src="../../assets/images/login.jpg" alt="不积跬步，无以至千里。不积小流，无以成江河。">
     <div class="login-wrap">
-      <form> 
+      <form>
         <label class="inline-label">
           <span>帐号：</span>
           <input :class="{error: wrongTip.username}" type="text" placeholder="请输入帐号" v-model="loginForm.username" @blur="checkForm('username')">
@@ -124,8 +124,7 @@ export default {
     };
   },
 
-  created() {
-  },
+  created() {},
 
   methods: {
     /**

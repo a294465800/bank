@@ -62,10 +62,13 @@ export default {
 
   /**
    * 获取考试列表
-   * @param {Function} cb 
+   * @param {Object} data {limit, warehouse_id}
+   * @param {Function} cb 回调
    */
-  getExaminationList(cb) {
-    axios.get(host + 'examination/list')
+  getExaminationList(data, cb) {
+    axios.get(host + 'questions', {
+      params: data
+    })
       .then(res => {
         typeof cb === 'function' && cb(res)
       })
@@ -79,9 +82,24 @@ export default {
    * @param {Function} cb 
    */
   getExamination(data, cb) {
-    axios.get(host + 'examination', {
+    axios.get(host + 'trains', {
         params: data
       })
+      .then(res => {
+        typeof cb === 'function' && cb(res)
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
+  },
+
+  /**
+   * 提交考试内容
+   * @param {Object} data 
+   * @param {Function} cb 回调
+   */
+  postExamination(data, cb) {
+    axios.post(host + 'finish/train', data)
       .then(res => {
         typeof cb === 'function' && cb(res)
       })

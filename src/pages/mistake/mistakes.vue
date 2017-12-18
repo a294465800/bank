@@ -33,12 +33,12 @@
     <ul class="question-list">
       <li class="question-item" v-for="(question, index) in mistakes" :key="question.id">
         <h3>{{(index + 1) + '.' + question.title}}</h3>
-          <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
-            <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
-          </el-radio-group>
-          <el-checkbox-group class="question-option" v-else-if="question.type === 'B'"  v-model="answer[question.id]">
-            <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
-          </el-checkbox-group>
+        <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
+          <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
+        </el-radio-group>
+        <el-checkbox-group class="question-option" v-else-if="question.type === 'B'" v-model="answer[question.id]">
+          <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
+        </el-checkbox-group>
       </li>
     </ul>
 
@@ -69,7 +69,7 @@ export default {
   },
 
   created() {
-    this.$http.getWrongQuestions('', res => {
+    this.$http.getWrongQuestions("", res => {
       for (let it of res.data.mistakes) {
         if (it.type === "A") {
           this.answer[it.id] = "";

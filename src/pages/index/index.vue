@@ -48,7 +48,7 @@
         <router-link :to="{ name: 'ExaminationList', params: { type: 3 }}">30道小测试</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'ExaminationList', params: { type: 5 }}">50道小测试</router-link>
+        <router-link :to="{ name: 'ExaminationList', params: { type: 4 }}">50道小测试</router-link>
       </li>
       <li>
         <router-link to="/rank">排名查询</router-link>
