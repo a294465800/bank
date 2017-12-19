@@ -217,8 +217,6 @@ export default {
   },
 
   created() {
-    // const data = this.$route.params;
-
     this.result = JSON.parse(sessionStorage.result);
   },
 

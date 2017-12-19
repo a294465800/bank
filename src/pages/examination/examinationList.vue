@@ -72,11 +72,9 @@ export default {
   methods: {
     //考试跳转
     startExamination(row) {
+      sessionStorage.exam_id = row.id;
       this.$router.push({
-        name: "Examination",
-        params: {
-          id: row.id
-        }
+        name: "Examination"
       });
     }
   }

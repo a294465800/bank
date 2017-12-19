@@ -173,6 +173,26 @@ export default {
   },
 
   /**
+   * 提交考试
+   * @param {String} id 
+   * @param {Object} data {token, answer}
+   * @param {Function} cb 回调
+   */
+  postExamination(id, data, cb) {
+    axios.post(host + `finish/exam/${id}`, data)
+      .then(res => {
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
+  },
+
+  /**
    * 获取排名
    * @param {Object} data {token}
    * @param {Function} cb 回调

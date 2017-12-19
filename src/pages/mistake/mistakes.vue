@@ -22,6 +22,14 @@
 .tips-message {
   word-break: break-all;
 }
+
+.answer-p {
+  font-size: 14px;
+}
+
+.answer {
+  color: red;
+}
 </style>
 
 <template>
@@ -46,10 +54,13 @@
             <el-checkbox label="C">{{'C.' + question.option_c}}</el-checkbox>
             <el-checkbox label="D">{{'D.' + question.option_d}}</el-checkbox>
           </el-checkbox-group>
+          <p class="answer-p">参考答案：
+            <span class="answer">{{question.answer}}</span>
+          </p>
         </li>
       </ul>
 
-      <el-button type="primary" class="submit-btn" @click="submit">提交</el-button>
+      <!-- <el-button type="primary" class="submit-btn" @click="submit">提交</el-button> -->
     </template>
     <template v-else>
       <p style="text-align: center;">暂无内容</p>
@@ -95,24 +106,24 @@ export default {
   },
 
   methods: {
-    submit() {
-      const answer = this.answer;
-      let left = [];
-      for (let i in answer) {
-        if (answer[i][0]) {
-          continue;
-        } else {
-          left.push(i);
-        }
-      }
-      if (left.length > 0) {
-        this.examTipsDialog = true;
-        const str = `你还有第${left.join(",")}题没有完成，请先完成答卷？`;
-        this.dialogMessage = str;
-      } else {
-        this.$router.push({ name: "Reword" });
-      }
-    },
+    // submit() {
+    //   const answer = this.answer;
+    //   let left = [];
+    //   for (let i in answer) {
+    //     if (answer[i][0]) {
+    //       continue;
+    //     } else {
+    //       left.push(i);
+    //     }
+    //   }
+    //   if (left.length > 0) {
+    //     this.examTipsDialog = true;
+    //     const str = `你还有第${left.join(",")}题没有完成，请先完成答卷？`;
+    //     this.dialogMessage = str;
+    //   } else {
+    //     this.$router.push({ name: "Reword" });
+    //   }
+    // },
 
     examConfirm() {
       this.examTipsDialog = false;
