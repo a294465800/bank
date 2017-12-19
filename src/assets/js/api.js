@@ -116,8 +116,8 @@ export default {
    * @param {Object} data 
    * @param {Function} cb 回调
    */
-  postTrains(id, data, cb) {
-    axios.post(host + `finish/train/${id}`, data)
+  postTrains(data, cb) {
+    axios.post(host + `finish/train`, data)
       .then(res => {
         if (res.data.code === '200') {
           typeof cb === 'function' && cb(res)

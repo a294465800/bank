@@ -79,7 +79,13 @@ export default new Router({
     {
       path: '/reword',
       name: 'Reword',
-      component: Reword
+      component: Reword,
+      beforeEnter: (to, from, next) => {
+        if (!from.name) {
+          next('trains/list')
+        }
+        next()
+      }
     },
   ]
 })

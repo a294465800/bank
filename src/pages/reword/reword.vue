@@ -196,7 +196,7 @@
   <div class="wrap">
     <h1 class="reword-title">感谢您的提交</h1>
     <div class="reword-content">
-      <h3 class="reword-tip">您的分数是：30分，正确率：30%：</h3>
+      <h3 class="reword-tip">您的分数是：{{result.score}} 分，正确率：{{result.accuracy}} %：</h3>
       <img v-if="envelopeShow" class="reword-img" :class="{'reword-img-shake': isShake}" src="../../assets/images/red-w.png" alt="红包" @click="openEnvelope">
       <div v-else class="reword-img">
         <img src="../../assets/images/red-y.png" alt="已拆开">
@@ -211,8 +211,15 @@ export default {
   data() {
     return {
       isShake: false,
-      envelopeShow: true
+      envelopeShow: true,
+      result: {}
     };
+  },
+
+  created() {
+    // const data = this.$route.params;
+
+    this.result = JSON.parse(sessionStorage.result);
   },
 
   methods: {

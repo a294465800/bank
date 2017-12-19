@@ -73,11 +73,9 @@ export default {
   methods: {
     //考试跳转
     startExamination(row) {
+      sessionStorage.exam_id = row.id;
       this.$router.push({
-        name: "Trains",
-        params: {
-          id: row.id
-        }
+        name: "Trains"
       });
     }
   }

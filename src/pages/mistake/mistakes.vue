@@ -33,12 +33,18 @@
     <template v-if="mistakes.length > 0">
       <ul class="question-list">
         <li class="question-item" v-for="(question, index) in mistakes" :key="question.id">
-          <h3>{{(index + 1) + '.' + question.title}}</h3>
-          <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
-            <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
+          <h3>{{(index + 1) + '.' + question.topic}}</h3>
+          <el-radio-group class="question-option" v-if="question.type === 1" v-model="answer[index]">
+            <el-radio label="A">{{'A.' + question.option_a}}</el-radio>
+            <el-radio label="B">{{'B.' + question.option_b}}</el-radio>
+            <el-radio label="C">{{'C.' + question.option_c}}</el-radio>
+            <el-radio label="D">{{'D.' + question.option_d}}</el-radio>
           </el-radio-group>
-          <el-checkbox-group class="question-option" v-else-if="question.type === 'B'" v-model="answer[question.id]">
-            <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
+          <el-checkbox-group class="question-option" v-else-if="question.type === 2" v-model="answer[index]">
+            <el-checkbox label="A">{{'A.' + question.option_a}}</el-checkbox>
+            <el-checkbox label="B">{{'B.' + question.option_b}}</el-checkbox>
+            <el-checkbox label="C">{{'C.' + question.option_c}}</el-checkbox>
+            <el-checkbox label="D">{{'D.' + question.option_d}}</el-checkbox>
           </el-checkbox-group>
         </li>
       </ul>
@@ -75,14 +81,15 @@ export default {
 
   created() {
     this.$http.getWrongQuestions({ token: sessionStorage._token }, res => {
-      for (let it of res.data.data) {
-        if (it.type === "A") {
-          this.answer[it.id] = "";
+      const data = res.data.data;
+      for (let it in data) {
+        if (data[it].type === 1) {
+          this.answer[it] = "";
         } else {
-          this.answer[it.id] = [];
+          this.answer[it] = [];
         }
       }
-      this.mistakes = res.data.data;
+      this.mistakes = data;
       this.loading = false;
     });
   },
