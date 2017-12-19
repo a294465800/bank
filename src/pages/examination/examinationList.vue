@@ -64,8 +64,8 @@ export default {
   },
 
   created() {
-    this.$http.getExaminations("", res => {
-      this.list = res.data.list;
+    this.$http.getExaminations({ token: sessionStorage._token }, res => {
+      this.list = res.data.data;
     });
   },
 

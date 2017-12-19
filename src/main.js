@@ -18,7 +18,7 @@ Vue.config.productionTip = false
  * 全局钩子
  */
 router.beforeEach((to, from, next) => {
-  if (sessionStorage.username) {
+  if (sessionStorage._token) {
     if (to.name === 'Login') {
       next(from.path)
     } else {
@@ -40,5 +40,7 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: {
+    App
+  }
 })

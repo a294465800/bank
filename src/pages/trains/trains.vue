@@ -29,20 +29,31 @@
     <i class="el-icon-loading"></i>
   </div>
   <div class="wrap" v-else>
-    <h1 class="test-title">考试标题</h1>
-    <ul class="question-list">
-      <li class="question-item" v-for="(question, index) in questions" :key="question.id">
-        <h3>{{(index + 1) + '.' + question.title}}</h3>
-        <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
-          <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
-        </el-radio-group>
-        <el-checkbox-group class="question-option" v-else-if="question.type === 'B'" v-model="answer[question.id]">
-          <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
-        </el-checkbox-group>
-      </li>
-    </ul>
+    <h1 class="test-title">{{warehouse.name}}</h1>
+    <template v-if="questions.length > 0">
+      <ul class="question-list">
+        <li class="question-item" v-for="(question, index) in questions" :key="question.id">
+          <h3>{{(index + 1) + '.' + question.topic}}</h3>
+          <el-radio-group class="question-option" v-if="question.type === 1" v-model="answer[question.id]">
+            <el-radio label="A">{{'A.' + question.option_a}}</el-radio>
+            <el-radio label="B">{{'B.' + question.option_b}}</el-radio>
+            <el-radio label="C">{{'C.' + question.option_c}}</el-radio>
+            <el-radio label="D">{{'D.' + question.option_d}}</el-radio>
+          </el-radio-group>
+          <el-checkbox-group class="question-option" v-else-if="question.type === 2" v-model="answer[question.id]">
+            <el-checkbox label="A">{{'A.' + question.option_a}}</el-checkbox>
+            <el-checkbox label="B">{{'B.' + question.option_b}}</el-checkbox>
+            <el-checkbox label="C">{{'C.' + question.option_c}}</el-checkbox>
+            <el-checkbox label="D">{{'D.' + question.option_d}}</el-checkbox>
+          </el-checkbox-group>
+        </li>
+      </ul>
 
-    <el-button type="primary" class="submit-btn" @click="submit">提交</el-button>
+      <el-button type="primary" class="submit-btn" @click="submit">提交</el-button>
+    </template>
+    <template v-else>
+      <p style="text-align: center">暂无内容</p>
+    </template>
 
     <el-dialog title="提示" :visible.sync="examTipsDialog" width="80%" center>
       <span class="tips-message">{{dialogMessage}}</span>
@@ -63,6 +74,7 @@ export default {
       dialogMessage: "",
 
       questions: [],
+      warehouse: {},
 
       answer: []
     };
@@ -71,25 +83,29 @@ export default {
   created() {
     const getData = {
       limit: sessionStorage.limit,
-      warehouse_id: this.$route.params.id
+      warehouse_id: this.$route.params.id,
+      token: sessionStorage._token
     };
     this.exam_id = this.$route.params.id;
     this.$http.getTrains(getData, res => {
-      for (let it of res.data.questions) {
-        if (it.type === "A") {
+      for (let it of res.data.data.questions) {
+        if (it.type === 1) {
           this.answer[it.id] = "";
         } else {
           this.answer[it.id] = [];
         }
       }
-      this.questions = res.data.questions;
+      this.questions = res.data.data.questions;
+      this.warehouse = res.data.data.warehouse;
       this.loading = false;
     });
   },
 
   methods: {
     submit() {
-      const answer = this.answer;
+      const answer = Object.assign(this.answer, {
+        token: sessionStorage._token
+      });
       let left = [];
       for (let i in answer) {
         if (answer[i][0]) {

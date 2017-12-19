@@ -2,7 +2,8 @@ import axios from 'axios'
 import qs from 'qs'
 
 // const host = 'https://xcx.xiashantown.cn/'
-const host = 'http://192.168.3.44:8081/api/v1/'
+// const host = 'http://192.168.3.44:8081/api/v1/'
+const host = 'http://192.168.3.22:8090/api/'
 
 /*
   配置 axios
@@ -25,7 +26,7 @@ export default {
   host: host,
 
   errFnc(err) {
-    window.alert(err.response.data.msg)
+    window.alert(err.msg)
   },
 
   /**
@@ -36,7 +37,11 @@ export default {
   postLogin(data, cb) {
     axios.post(host + 'staff/login', data)
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -53,7 +58,11 @@ export default {
         params: data
       })
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -62,12 +71,19 @@ export default {
 
   /**
    * 获取考试列表
+   * @param {Object} data {token}
    * @param {Function} cb 回调
    */
-  getTrainsList(cb) {
-    axios.get(host + 'trains')
+  getTrainsList(data, cb) {
+    axios.get(host + 'trains', {
+        params: data
+      })
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -84,7 +100,11 @@ export default {
         params: data
       })
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -99,7 +119,11 @@ export default {
   postTrains(id, data, cb) {
     axios.post(host + `finish/train/${id}`, data)
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -116,7 +140,11 @@ export default {
         params: data
       })
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -128,10 +156,16 @@ export default {
    * @param {String} id 
    * @param {Function} cb 回调
    */
-  getExamination(id, cb) {
-    axios.get(host + `exam/${id}`)
+  getExamination(id, data, cb) {
+    axios.get(host + `exam/${id}`, {
+        params: data
+      })
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)
@@ -140,12 +174,19 @@ export default {
 
   /**
    * 获取排名
+   * @param {Object} data {token}
    * @param {Function} cb 回调
    */
-  getRank(cb) {
-    axios.get(host + 'staffs')
+  getRank(data, cb) {
+    axios.get(host + 'staffs', {
+        params: data
+      })
       .then(res => {
-        typeof cb === 'function' && cb(res)
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
       })
       .catch(err => {
         this.errFnc(err)

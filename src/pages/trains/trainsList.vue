@@ -64,8 +64,8 @@ export default {
   },
 
   created() {
-    this.$http.getTrainsList(res => {
-      this.list = res.data.list;
+    this.$http.getTrainsList({ token: sessionStorage._token }, res => {
+      this.list = res.data.data;
     });
     this.title = `（${sessionStorage.limit}道题）`;
   },

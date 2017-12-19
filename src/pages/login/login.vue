@@ -133,7 +133,7 @@ export default {
     login() {
       if (this.loginForm.username && this.loginForm.password) {
         this.$http.postLogin(this.loginForm, res => {
-          sessionStorage.username = this.loginForm.username;
+          sessionStorage._token = res.data.data
           this.$router.push("/");
         });
       } else {

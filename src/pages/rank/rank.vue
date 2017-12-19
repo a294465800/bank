@@ -74,7 +74,7 @@
       </li>
       <li class="rank-row" :class="{stripe: index % 2 === 1}" v-for="(rank,index) in rankList" :key="rank.id">
         <span class="rank-index">{{index + 1}}</span>
-        <span class="rank-number">{{rank.number}}</span>
+        <span class="rank-number">{{rank.username}}</span>
         <span class="rank-name">{{rank.name}}</span>
         <span class="rank-score">{{rank.score}}分</span>
       </li>
@@ -92,8 +92,8 @@ export default {
   },
 
   created() {
-    this.$http.getRank(res => {
-      this.rankList = res.data.rank;
+    this.$http.getRank({ token: sessionStorage._token }, res => {
+      this.rankList = res.data.data;
       this.loading = false;
     });
   }

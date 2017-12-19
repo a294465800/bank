@@ -30,19 +30,24 @@
   </div>
   <div class="wrap" v-else>
     <h1 class="test-title">温故知新</h1>
-    <ul class="question-list">
-      <li class="question-item" v-for="(question, index) in mistakes" :key="question.id">
-        <h3>{{(index + 1) + '.' + question.title}}</h3>
-        <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
-          <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
-        </el-radio-group>
-        <el-checkbox-group class="question-option" v-else-if="question.type === 'B'" v-model="answer[question.id]">
-          <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
-        </el-checkbox-group>
-      </li>
-    </ul>
+    <template v-if="mistakes.length > 0">
+      <ul class="question-list">
+        <li class="question-item" v-for="(question, index) in mistakes" :key="question.id">
+          <h3>{{(index + 1) + '.' + question.title}}</h3>
+          <el-radio-group class="question-option" v-if="question.type === 'A'" v-model="answer[question.id]">
+            <el-radio :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-radio>
+          </el-radio-group>
+          <el-checkbox-group class="question-option" v-else-if="question.type === 'B'" v-model="answer[question.id]">
+            <el-checkbox :label="item.id" v-for="(item) in question.options" :key="item.id">{{item.id + '.' + item.value}}</el-checkbox>
+          </el-checkbox-group>
+        </li>
+      </ul>
 
-    <el-button type="primary" class="submit-btn" @click="submit">提交</el-button>
+      <el-button type="primary" class="submit-btn" @click="submit">提交</el-button>
+    </template>
+    <template v-else>
+      <p style="text-align: center;">暂无内容</p>
+    </template>
 
     <el-dialog title="提示" :visible.sync="examTipsDialog" width="80%" center>
       <span class="tips-message">{{dialogMessage}}</span>
@@ -69,15 +74,15 @@ export default {
   },
 
   created() {
-    this.$http.getWrongQuestions("", res => {
-      for (let it of res.data.mistakes) {
+    this.$http.getWrongQuestions({ token: sessionStorage._token }, res => {
+      for (let it of res.data.data) {
         if (it.type === "A") {
           this.answer[it.id] = "";
         } else {
           this.answer[it.id] = [];
         }
       }
-      this.mistakes = res.data.mistakes;
+      this.mistakes = res.data.data;
       this.loading = false;
     });
   },
