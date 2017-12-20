@@ -3,7 +3,7 @@ import qs from 'qs'
 
 // const host = 'https://xcx.xiashantown.cn/'
 // const host = 'http://192.168.3.44:8081/api/v1/'
-const host = 'http://192.168.3.22:8090/api/'
+const host = 'http://119.23.202.220:8099/api/'
 
 /*
   配置 axios
