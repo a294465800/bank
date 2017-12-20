@@ -67,3 +67,7 @@ ol {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.el-checkbox__label,.el-radio {
+  white-space: normal;
+}

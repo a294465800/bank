@@ -9,6 +9,7 @@
 }
 .question-option {
   padding-left: 15px;
+  padding-right: 10px;
 }
 
 .submit-btn {
@@ -110,7 +111,7 @@ export default {
         if (answer[i][0]) {
           continue;
         } else {
-          left.push(i);
+          left.push(i + 1);
         }
       }
       if (left.length > 0) {

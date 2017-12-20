@@ -196,12 +196,17 @@
   <div class="wrap">
     <h1 class="reword-title">感谢您的提交</h1>
     <div class="reword-content">
-      <h3 class="reword-tip">您的分数是：{{result.score}} 分，正确率：{{result.accuracy}} %：</h3>
-      <img v-if="envelopeShow" class="reword-img" :class="{'reword-img-shake': isShake}" src="../../assets/images/red-w.png" alt="红包" @click="openEnvelope">
-      <div v-else class="reword-img">
-        <img src="../../assets/images/red-y.png" alt="已拆开">
-        <span class="reword-tips">恭喜您！获得了 <br>0.4 元</span>
-      </div>
+      <h3 class="reword-tip">您的分数是：{{result.score}} 分，正确率：{{(result.accuracy * 100).toFixed(2)}} %：</h3>
+      <template v-if="result.price > 0">
+        <img v-if="envelopeShow" class="reword-img" :class="{'reword-img-shake': isShake}" src="../../assets/images/red-w.png" alt="红包" @click="openEnvelope">
+        <div v-else class="reword-img">
+          <img src="../../assets/images/red-y.png" alt="已拆开">
+          <span class="reword-tips">恭喜您！获得了 <br>{{result.price}} 元</span>
+        </div>
+      </template>
+      <template v-else>
+        <p style="text-align: center; font-size: 16px;">没有获得红包哦~</p>
+      </template>
     </div>
   </div>
 </template>
@@ -223,9 +228,14 @@ export default {
   methods: {
     openEnvelope() {
       this.isShake = true;
+      const getData = {
+        number: this.result.number
+      };
       setTimeout(() => {
-        this.isShake = false;
-        this.envelopeShow = false;
+        this.$http.getCash(getData, res => {
+          this.isShake = false;
+          this.envelopeShow = false;
+        });
       }, 2000);
     }
   }

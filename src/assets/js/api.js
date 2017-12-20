@@ -211,5 +211,26 @@ export default {
       .catch(err => {
         this.errFnc(err)
       })
+  },
+
+  /**
+   * 提现
+   * @param {Object} data {number}
+   * @param {Function} cb 回调
+   */
+  getCash(data, cb) {
+    axios.get(host + 'cash', {
+        params: data
+      })
+      .then(res => {
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
   }
 }

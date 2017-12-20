@@ -137,7 +137,7 @@ export default {
       const timer = setInterval(() => {
         if (this.leftTime <= 0) {
           clearInterval(timer);
-          this.submit();
+          this.submit(true);
         }
         const time = this.leftTime;
         let mintues = Math.floor(time / 60);
@@ -161,7 +161,7 @@ export default {
     },
 
     //提交
-    submit() {
+    submit(flag) {
       const answer = this.answer;
       let left = [];
       for (let i in answer) {
@@ -171,7 +171,7 @@ export default {
           left.push(i * 1 + 1);
         }
       }
-      if (left.length > 0) {
+      if (left.length > 0 && !flag) {
         this.examTipsDialog = true;
         const str = `你还有第${left.join(",")}题没有完成，请先完成答卷？`;
         this.dialogMessage = str;
