@@ -42,13 +42,13 @@
       <ul class="question-list">
         <li class="question-item" v-for="(question, index) in mistakes" :key="question.id">
           <h3>{{(index + 1) + '.' + question.topic}}</h3>
-          <el-radio-group class="question-option" v-if="question.type === 1" v-model="answer[index]">
+          <el-radio-group class="question-option" v-if="question.type == '1'" v-model="answer[index]">
             <el-radio label="A">{{'A.' + question.option_a}}</el-radio>
             <el-radio label="B">{{'B.' + question.option_b}}</el-radio>
             <el-radio label="C">{{'C.' + question.option_c}}</el-radio>
             <el-radio label="D">{{'D.' + question.option_d}}</el-radio>
           </el-radio-group>
-          <el-checkbox-group class="question-option" v-else-if="question.type === 2" v-model="answer[index]">
+          <el-checkbox-group class="question-option" v-else-if="question.type == '2'" v-model="answer[index]">
             <el-checkbox label="A">{{'A.' + question.option_a}}</el-checkbox>
             <el-checkbox label="B">{{'B.' + question.option_b}}</el-checkbox>
             <el-checkbox label="C">{{'C.' + question.option_c}}</el-checkbox>
