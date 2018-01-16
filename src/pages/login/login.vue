@@ -133,8 +133,12 @@ export default {
     login() {
       if (this.loginForm.username && this.loginForm.password) {
         this.$http.postLogin(this.loginForm, res => {
-          sessionStorage._token = res.data.data
-          this.$router.push("/");
+          sessionStorage._token = res.data.data;
+          if (res.data.alipay) {
+            this.$router.push("/");
+          } else {
+            this.$router.push("/info");
+          }
         });
       } else {
         return false;
