@@ -9,6 +9,7 @@ import ExaminationList from '@/pages/examination/examinationList'
 import Examination from '@/pages/examination/examination'
 import Rank from '@/pages/rank/rank'
 import Reword from '@/pages/reword/reword'
+import Personal from '@/pages/personal/personal'
 
 Vue.use(Router)
 
@@ -86,6 +87,11 @@ export default new Router({
         }
         next()
       }
+    },
+    {
+      path: '/info',
+      name: 'Personal',
+      component: Personal
     },
   ]
 })

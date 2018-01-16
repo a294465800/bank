@@ -232,5 +232,45 @@ export default {
       .catch(err => {
         this.errFnc(err)
       })
+  },
+
+  /**
+   * 回去用户信息
+   * @param {Object} data token
+   * @param {Function} cb 
+   */
+  getInfo(data, cb) {
+    axios.get(host + 'staff/info', {
+        params: data
+      })
+      .then(res => {
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
+  },
+
+  /**
+   * 提交个人信息
+   * @param {Object} data {token, password, alipay}
+   * @param {Function} cb 回调
+   */
+  postInfo(data, cb) {
+    axios.post(host + `staff/info`, data)
+      .then(res => {
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(res)
+        } else {
+          this.errFnc(res.data)
+        }
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
   }
 }

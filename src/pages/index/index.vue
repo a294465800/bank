@@ -36,6 +36,9 @@
   <div class="full-wrap">
     <ul class="index-list flex-column flex-center">
       <li>
+        <router-link to="/info">信息修改</router-link>
+      </li>
+      <li>
         <router-link to="/mistake">温故知新</router-link>
       </li>
       <li @click="saveLimit(10)">
