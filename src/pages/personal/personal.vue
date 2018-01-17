@@ -91,11 +91,11 @@
           <input :class="{error: wrongTip.alipay}" type="text" placeholder="请输入支付宝帐号" v-model="loginForm.alipay" @blur="checkForm('alipay')">
           <p v-if="wrongTip.alipay" class="form-tips">{{formCheck.alipay.message}}</p>
         </label>
-        <label class="inline-label">
+        <!-- <label class="inline-label">
           <span>答题登录密码：</span>
           <input :class="{error: wrongTip.password}" type="password" placeholder="请输入答题登录密码" v-model="loginForm.password" @blur="checkForm('password')">
           <p v-if="wrongTip.password" class="form-tips">{{formCheck.password.message}}</p>
-        </label>
+        </label> -->
         <button class="form-btn" @click.prevent="login">确认</button>
       </form>
     </div>
@@ -108,16 +108,16 @@ export default {
     return {
       loginForm: {
         alipay: "",
-        password: "******",
+        // password: "******",
         token: sessionStorage._token
       },
       formCheck: {
         alipay: { message: "帐号不能为空" },
-        password: { message: "密码不能为空" }
+        // password: { message: "密码不能为空" }
       },
       wrongTip: {
         alipay: false,
-        password: false
+        // password: false
       }
     };
   },
@@ -133,10 +133,10 @@ export default {
      * 登录函数
      */
     login() {
-      if (this.loginForm.alipay && this.loginForm.password) {
-        if (this.loginForm.password === "******") {
-          this.loginForm.password = "";
-        }
+      if (this.loginForm.alipay) {
+        // if (this.loginForm.password === "******") {
+        //   this.loginForm.password = "";
+        // }
         this.$http.postInfo(this.loginForm, res => {
           this.$router.push("/");
         });
