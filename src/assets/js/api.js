@@ -272,5 +272,24 @@ export default {
       .catch(err => {
         this.errFnc(err)
       })
+  },
+
+  /**
+   * 登录校验
+   */
+  checkLogin(data, cb) {
+    axios.get(host + 'check', {
+        params: data
+      })
+      .then(res => {
+        if (res.data.code === '200') {
+          typeof cb === 'function' && cb(true)
+        } else {
+          typeof cb === 'function' && cb(false)
+        }
+      })
+      .catch(err => {
+        this.errFnc(err)
+      })
   }
 }

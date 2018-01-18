@@ -64,7 +64,7 @@ export default {
   },
 
   created() {
-    this.$http.getTrainsList({ token: sessionStorage._token }, res => {
+    this.$http.getTrainsList({ token: localStorage.bank_token }, res => {
       this.list = res.data.data;
     });
     this.title = `（${sessionStorage.limit}道题）`;

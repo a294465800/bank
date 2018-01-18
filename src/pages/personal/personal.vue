@@ -109,7 +109,7 @@ export default {
       loginForm: {
         alipay: "",
         // password: "******",
-        token: sessionStorage._token
+        token: localStorage.bank_token
       },
       formCheck: {
         alipay: { message: "帐号不能为空" },
@@ -123,7 +123,7 @@ export default {
   },
 
   created() {
-    this.$http.getInfo({ token: sessionStorage._token }, res => {
+    this.$http.getInfo({ token: localStorage.bank_token }, res => {
       this.loginForm.alipay = res.data.data.alipay;
     });
   },

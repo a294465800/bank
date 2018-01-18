@@ -64,7 +64,7 @@ export default {
   },
 
   created() {
-    this.$http.getExaminations({ token: sessionStorage._token }, res => {
+    this.$http.getExaminations({ token: localStorage.bank_token }, res => {
       this.list = res.data.data;
     });
   },

@@ -91,7 +91,7 @@ export default {
   },
 
   created() {
-    this.$http.getWrongQuestions({ token: sessionStorage._token }, res => {
+    this.$http.getWrongQuestions({ token: localStorage.bank_token }, res => {
       const data = res.data.data;
       for (let it in data) {
         if (data[it].type === 1) {

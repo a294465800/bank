@@ -114,7 +114,7 @@ export default {
   created() {
     const id = sessionStorage.exam_id;
     this.exam_id = id;
-    this.$http.getExamination(id, { token: sessionStorage._token }, res => {
+    this.$http.getExamination(id, { token: localStorage.bank_token }, res => {
       const data = res.data.data;
       for (let it in data.question) {
         if (data.question[it].type === 1) {
@@ -177,7 +177,7 @@ export default {
         this.dialogMessage = str;
       } else {
         const postData = {
-          token: sessionStorage._token,
+          token: localStorage.bank_token,
           answer: []
         };
         answer.forEach((value, index) => {

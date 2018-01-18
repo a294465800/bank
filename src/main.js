@@ -18,11 +18,30 @@ Vue.config.productionTip = false
  * 全局钩子
  */
 router.beforeEach((to, from, next) => {
-  if (sessionStorage._token) {
-    if (to.name === 'Login') {
-      next(from.path)
+  if (localStorage.bank_token) {
+    if (sessionStorage.bank_status && sessionStorage.bank_status === 'success') {
+      if (to.name === 'Login') {
+        next(from.path)
+      } else {
+        next()
+      }
     } else {
-      next()
+      http.checkLogin({
+        token: localStorage.bank_token
+      }, status => {
+        if (status) {
+          sessionStorage.bank_status = 'success'
+          if (to.name === 'Login') {
+            next(from.path)
+          } else {
+            next()
+          }
+        } else {
+          next({
+            path: '/login'
+          })
+        }
+      })
     }
   } else {
     if (to.name !== 'Login') {

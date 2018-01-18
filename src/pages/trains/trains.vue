@@ -85,7 +85,7 @@ export default {
     const getData = {
       limit: sessionStorage.limit,
       warehouse_id: sessionStorage.exam_id,
-      token: sessionStorage._token
+      token: localStorage.bank_token
     };
     this.exam_id = sessionStorage.exam_id;
     this.$http.getTrains(getData, res => {
@@ -121,7 +121,7 @@ export default {
       } else {
         let postData = {
           warehouse_id: this.exam_id,
-          token: sessionStorage._token,
+          token: localStorage.bank_token,
           answers: []
         };
         this.answer.forEach((value, index) => {

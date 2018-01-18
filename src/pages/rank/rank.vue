@@ -92,7 +92,7 @@ export default {
   },
 
   created() {
-    this.$http.getRank({ token: sessionStorage._token }, res => {
+    this.$http.getRank({ token: localStorage.bank_token }, res => {
       this.rankList = res.data.data;
       this.loading = false;
     });
