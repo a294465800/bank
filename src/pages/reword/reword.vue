@@ -207,6 +207,7 @@
       <template v-else>
         <p style="text-align: center; font-size: 16px;">没有获得红包哦~</p>
       </template>
+        <el-button size="small" type="primary" style="margin-top:30px;" @click="goBack">返回首页</el-button>
     </div>
   </div>
 </template>
@@ -237,6 +238,10 @@ export default {
           this.envelopeShow = false;
         });
       }, 2000);
+    },
+
+    goBack() {
+      this.$router.push("/");
     }
   }
 };
